@@ -1,4 +1,5 @@
-import * as actionTypes from '../actions/actions';
+import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../utility'; 
 
 const initialState = {
     results:[]
@@ -7,24 +8,27 @@ const initialState = {
 const reducer = (state = initialState, action)=>{
     switch(action.type){
         case actionTypes.STORE_RESULT:
+            return updateObject(state,{results:state.results.concat({id:new Date(), value: action.result*2})});
             
-            return{
-                ...state,
-                //Array.pushを使うとoriginalを変化させてしまうのでimmutableなメソッドであるconcatを使う
-                results:state.results.concat({id:new Date(), value: action.result})
-                // counterに関してはlocalで管理していないのでglobal stateから参照する必要がある(そのため、actionオブジェクトを介す必要がある)↑
-            }
+            // return{
+            //     ...state,
+            //     //Array.pushを使うとoriginalを変化させてしまうのでimmutableなメソッドであるconcatを使う
+            //     results:state.results.concat({id:new Date(), value: action.result*2})
+            //     // counterに関してはlocalで管理していないのでglobal stateから参照する必要がある(そのため、actionオブジェクトを介す必要がある)↑
+            // }
         case actionTypes.DELETE_RESULT:
+            
             // const id = 2;
             // const newArray = [...state.results];//arrayを複製
             // newArray.splice(id,1);//spliceはmutableなメソッド
             const updatedArray = state.results.filter(result=> result.id !== action.resultElId);
             //filterはimmutableなメソッド,actionオブジェクトからidを取得する
-            return{
-                ...state,
-                //Array.pushを使うとoriginalを変化させてしまうのでimmutableなメソッドであるconcatを使う
-                results:updatedArray
-            }
+            return updateObject(state,{results:updatedArray});
+            // return{
+            //     ...state,
+            //     //Array.pushを使うとoriginalを変化させてしまうのでimmutableなメソッドであるconcatを使う
+            //     results:updatedArray
+            // }
     }
     return state;
 };
