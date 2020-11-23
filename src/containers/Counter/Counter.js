@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';//connectはhocをreturn するfunctionであることに注意
+import * as actionCreators from '../../store/actions/actions';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
-import * as actionType from '../../store/actions';
+
 
 class Counter extends Component {
     render () {
@@ -33,12 +34,12 @@ const mapStateToProps = state =>{//このstateはreducerで定義されている
 };
 const mapDispatchToProps = dispatch =>{//引数にstoreオブジェクトの持っているdispatch関数が自動的に渡っている
     return {
-        onIncrementCounter: () => dispatch({type:actionType.INCREMENT}),//これでonIncrementCounterというpropsが追加されcomponent内で使用できるようになった　
-        onDecrementCounter:()=>dispatch({type:actionType.DECREMENT}),
-        onAddCounter:()=>dispatch({type:actionType.ADD, val:10}),
-        onSubtractCounter:()=>dispatch({type:actionType.SUBTRACT,val:15}),
-        onStoreResult:(result)=>dispatch({type:actionType.STORE_RESULT,result:result}),
-        onDeleteResult:(id)=>dispatch({type:actionType.DELETE_RESULT,resultElId:id}),//componentからid(値)をreducerに渡したいときはactionオブジェクトを介す必要がある
+        onIncrementCounter: () => dispatch(actionCreators.increment()),//これでonIncrementCounterというpropsが追加されcomponent内で使用できるようになった　
+        onDecrementCounter:()=>dispatch(actionCreators.decrement()),
+        onAddCounter:()=>dispatch(actionCreators.add(10)),
+        onSubtractCounter:()=>dispatch(actionCreators.subtract(15)),
+        onStoreResult:(result)=>dispatch(actionCreators.storeResult(result)),
+        onDeleteResult:(id)=>dispatch(actionCreators.deleteResult(id)),//componentからid(値)をreducerに渡したいときはactionオブジェクトを介す必要がある
     };
 };
 
