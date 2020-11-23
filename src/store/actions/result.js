@@ -13,9 +13,9 @@ export const saveResult = (res) =>{
 //redux-thunk middlewareのおかげでaction creator内で非同期関数を実行できる
 //old actionをblockし、来たるべきタイミングで(引数に渡っている)dispatchを実行することができる
 export const storeResult = (res) =>{
+    //redux-thunkのおかげでdispatchとgetStateをaction-creatorで実行できる
+    //ただ、global stateをaction-creator内で使用したいときはgetStateを使うよりもcomponentのmapDispatchToProps内のメソッドの引数でglobal stateを渡すのがbest-practiceらしい
     return (dispatch,getState) => {
-        //redux-thunkのおかげでdispatchとgetStateをaction-creatorで実行できる
-        //ただ、global stateをaction-creator内で使用したいときはgetStateを使うよりもcomponentのmapDispatchToPropsの引数でglobal stateを渡すのがbest-practiceらしい
         setTimeout(()=>{
             const oldCounter = getState().ctr.counter;
             console.log(oldCounter);
