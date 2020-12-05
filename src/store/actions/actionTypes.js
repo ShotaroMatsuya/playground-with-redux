@@ -7,4 +7,5 @@ export const SUBTRACT = 'SUBTRACT';
 export const STORE_RESULT = 'STORE_RESULT';
 export const DELETE_RESULT = 'DELETE_RESULT';
 
-
+export const STORE_START = 'STORE_START';
+export const STORE_FINISH = 'STORE_FINISH';
