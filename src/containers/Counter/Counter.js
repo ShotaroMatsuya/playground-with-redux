@@ -39,7 +39,7 @@ class Counter extends Component {
         />
         <hr />
         <button onClick={() => this.props.onStoreResult(this.props.ctr)}>
-          Store Result
+          Store Result(x2)
         </button>
         <ul>{results}</ul>
       </div>
